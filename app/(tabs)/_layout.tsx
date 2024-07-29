@@ -1,37 +1,72 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text, Image } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import { Book, Camera, Home, PersonStanding, PlusCircle } from "lucide-react-native";
+import { twMerge } from "tailwind-merge";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarShowLabel: false,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: "Home",
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <View className="items-center justify-center">
+                <Home color={"red"} />
+                <Text className={twMerge("text-xs", focused && "font-bold")}>Home</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="bookmark"
+          options={{
+            title: "Bookmark",
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <View className="items-center justify-center">
+                <Book color={"red"} />
+                <Text className={twMerge("text-xs", focused && "font-bold")}>BookMark</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: "Create",
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <View className="items-center justify-center">
+                <PlusCircle color={"red"} />
+                <Text className={twMerge("text-xs", focused && "font-bold")}>Create</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <View className="items-center justify-center">
+                <PersonStanding color={"red"} className="" />
+                <Text className={twMerge("text-xs", focused && "font-bold")}>Profile</Text>
+              </View>
+            ),
+          }}
+        />
+      </Tabs>
+    </>
   );
-}
+};
+
+export default TabsLayout;
